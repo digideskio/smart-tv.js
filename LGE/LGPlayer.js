@@ -5,27 +5,38 @@ var LG_Player = {
 
 	init: function () {
 		LG.log('player init');
-		this._player = document.getElementById("lgPlayer");
-		if(!this._player) {
-			var tmp = document.createElement("span");
-			tmp.innerHTML = '<object type="application/x-netcast-av" data="" autostart="false" width="1280" height="720" id="lgPlayer" style="position:absolute; top:0px; left:0px; z-index: 1;"></object>';
-			document.body.appendChild(tmp);
-			this._player = document.getElementById("lgPlayer");
+
+		var holder = document.getElementById("playerBox");
+		if(holder) {
+			// player already exists, remove it.
+			this.stop();
+			holder.removeChild(this._player);
+		} else {
+			// player does not exists, create holder.
+			holder = document.createElement("span");
+			holder.setAttribute("id", "playerBox");
+			document.body.appendChild(holder);
 		}
+
+		// create player
+		holder.innerHTML = '<object type="application/x-netcast-av" data="" ' +
+			'autostart="false" width="500" height="500" id="lgPlayer" ' +
+			'style="position:absolute; top:0px; left:0px; z-index: 1;">' +
+			'</object>';
+		this._player = document.getElementById("lgPlayer");
 
 		// media object events
 		this._player.onPlayStateChange = this.onPlayStateChange;
 		this._player.onBuffering = this.onBuffering;
 	},
 
+	setURL: function (URL) { this._url = URL; },
+	getURL: function () { return this._url; },
 
-	setURL: function (URL) {
-		this._url = URL;
-	},
-	getURL: function () {
-		return this._url;
-	},
-
+	setWidth: function (width) { this._player.width = width; },
+	getWidth: function () { return this._player.width; },
+	setHeight: function (height) { this._player.height = height; },
+	getHeight: function () { return this._player.height; },
 
 	play: function () {
 		this._player.data = this._url;
