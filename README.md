@@ -3,6 +3,8 @@ A Smart TV app development framework. It's designed so that it adds a device abs
 
 ## Installation
 
+to-do...
+
 ## Usage
 
 Example:
@@ -16,9 +18,14 @@ $.tv.player.play();
 
 ## API
 
+The following APIs are available:
+
++ [Player](#player)
+
+
 ---------------------------------------
 
-### Player
+### <a name="player"></a>Player
 
 The Player object provides the ability to play video files on a device.
 
@@ -33,8 +40,6 @@ $.tv.player
 + [play](#player-play)
 + [pause](#player-pause)
 + [stop](#player-stop)
-
----------------------------------------
 
 ### <a name='player-gcp'></a>getCurrentPosition
 
