@@ -1,88 +1,36 @@
-var LG = {
 
-	_device: null,
-	_log: null,
-	logConfig: false,
-	onFocusId: '',
-	onHoverId: '',
+/**
+ * LG TV wrapper.
+ * @version 0.0.1
+ */
 
-	init: function () {
-		this._device = document.getElementById("deviceObj");
-		if(!this._device) {
-			var tmp = document.createElement("div");
-			tmp.innerHTML = "<object type='application/x-netcast-info' id='deviceObj'> </object>";
-			document.body.appendChild(tmp);
-			this._device = document.getElementById("deviceObj");
-		}
+var $.tv = $.tv || {};
+(function($) {
 
-		// init log
-		this._log = document.getElementById("debug");
-	},
+    $.tv = {
+
+        _device: null,
 
 
-	//
-	// focus
-	//
-	getOnFocusId: function () { return this.onFocusId; },
-	setFocus: function (elementID) {
-		var prev = document.getElementById(this.onFocusId),
-			el = document.getElementById(elementID);
+        init: function () {
+            this._device = document.getElementById("deviceObj");
+            if(!this._device) {
+                var tmp = document.createElement("div");
+                tmp.innerHTML = "<object type='application/x-netcast-info' id='deviceObj'> </object>";
+                document.body.appendChild(tmp);
+                this._device = document.getElementById("deviceObj");
+            }
+        },
 
-		// take focus away from existing focused element
-		if (prev) {
-			prev.blur();
-			this.onFocusId = '';
-		}
+        /**
+         * The NetCast Platform provides a proprietary API, ‘window.NetCastExit()’,
+         * to implement the exit function to AV. A JavaScript application can use
+         * this API for users to exit or quit the application to AV.
+         */
+        quit: function () {
+            window.NetCastExit();
+        }
 
-		// set focus on new element
-		if (el) {
-			el.focus();
-			this.onFocusId = elementID;
-		}
-	},
-	isFocused: function (otherID) {
-		return otherID == this.onFocusId;
-	},
+    };
 
-	//
-	// hover
-	//
-	setHover: function (elementID) {
-		var prev = document.getElementById(this.onHoverId),
-			el = document.getElementById(elementID);
-
-		// take hover away from existing hovered element
-		if (prev) {
-			this.offHover(this.onHoverId);
-		}
-
-		// set hover
-		if (el) {
-			el.className += " hover";
-			this.onHoverId = elementID;
-		}
-	},
-	offHover: function (elementID) {
-		var el = document.getElementById(elementID);
-		el.className = el.className.replace( /(?:^|\s)hover(?!\S)/g , '' );
-		this.hoverEl = '';
-	},
-
-
-
-	qmenu: function () {
-		if(window.NetCastLaunchQMENU)
-			window.NetCastLaunchQMENU();
-	},
-
-	quit: function () {
-		window.NetCastBack();
-	},
-
-	log : function (text) {
-		if (this.logConfig) {
-			this._log.innerHTML = text + "<br />" + this._log.innerHTML;
-			console.log(text);
-		}
-	}
 };
