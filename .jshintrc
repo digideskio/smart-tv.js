@@ -1,0 +1,24 @@
+{
+	"bitwise": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": true,
+	"freeze": true,
+	"indent": 4,
+	"latedef": "nofunc",
+	"newcap": true,
+	"noarg": true,
+	"noempty": true,
+	"quotmark": "single",
+	"undef": true,
+	"maxparams": 3,
+
+	"debug": true,
+	"funcscope": true,
+	"maxerr": 200,
+
+	"browser": true,
+	"devel": true,
+
+	"browserify": true
+}
