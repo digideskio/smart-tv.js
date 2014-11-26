@@ -6,8 +6,10 @@
 
 
 
-var TV_Platform = require('../platform');
 var inherits = require('../inherits');
+var TV_Platform = require('../platform');
+// var TV_Player_Default = require('../player/default');
+
 
 var TV_Platform_Default = function() {
 	TV_Platform.apply(this, ['Default']);
@@ -40,7 +42,7 @@ inherits(TV_Platform_Default, TV_Platform, {
 		return  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
 			function(c) {
 				var r = Math.random() * 16 | 0,
-					v = c == 'x' ? r : (r & 0x3 | 0x8);
+					v = c === 'x' ? r : (r & 0x3 | 0x8);
 				return v.toString(16);
 			});
 	},
@@ -51,6 +53,13 @@ inherits(TV_Platform_Default, TV_Platform, {
 	exit: function() {
 		window.close();
 	},
+
+
+	//  Plugins
+	//------------------------------------//
+
+	// Default Platform Player instance.
+	// player: new TV_Player_Default(),
 
 
 	//  Platform specific
