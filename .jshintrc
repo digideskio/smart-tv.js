@@ -1,5 +1,4 @@
 {
-	"bitwise": true,
 	"curly": true,
 	"eqeqeq": true,
 	"forin": true,
@@ -20,5 +19,8 @@
 	"browser": true,
 	"devel": true,
 
-	"browserify": true
+	"browserify": true,
+	"globals": {
+		"Common": true
+	}
 }
