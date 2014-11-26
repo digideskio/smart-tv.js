@@ -10,10 +10,14 @@ module.exports = function(grunt) {
 		
 		browserify: {
 			build: {
-				browserifyOptions: {
-					debug: true
+				options: {
+				      browserifyOptions: {
+				          standalone: 'TV',
+				          debug: true
+				     }
 				},
-				src: ['src/**/*.js'],
+				// src: ['src/**/*.js'],
+				src: ['src/core.js'],
 				dest: 'build/smart-tv.js'
 			}
 		},
@@ -39,7 +43,7 @@ module.exports = function(grunt) {
 		watch: {
 			build: {
 				files: ['src/**/*.js'],
-				tasks: ['jshint', 'browserify', 'uglify']
+				tasks: ['clean', 'jshint', 'browserify', 'uglify']
 			}
 		}
 
