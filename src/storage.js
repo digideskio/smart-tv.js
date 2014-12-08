@@ -51,6 +51,14 @@ TV_Storage.prototype = {
 	// (http://dev.w3.org/html5/webstorage/#dom-storage-setitem)
 	// The setItem(key, value) method must first check if a key/value pair with
 	// the given key already exists in the list associated with the object.
+	// If it does not, then a new key/value pair must be added to the list, with
+	// the given key and with its value set to value.
+	// If the given key does exist in the list, and its value is not equal to
+	// value, then it must have its value updated to value. If its previous
+	// value is equal to value, then the method must do nothing.
+	// If it couldn't set the new value, the method must throw a
+	// QuotaExceededError exception. (Setting could fail if, e.g., the user has
+	// disabled storage for the site, or if the quota has been exceeded.)
 	//
 	setItem: function(key, value) {},
 

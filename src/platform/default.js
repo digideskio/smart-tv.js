@@ -12,6 +12,7 @@ var TV_Input = require('../input');
 var TV_Player_Default = require('../player/default');
 var events = require('../events');
 // var TV_Player_Default = require('../player/default');
+var TV_Storage_Default = require('../storage/default');
 
 
 var TV_Platform_Default = function() {
@@ -70,6 +71,9 @@ inherits(TV_Platform_Default, TV_Platform, {
 
 	//  Plugins
 	//------------------------------------//
+
+	// Default Platform Storage instance.
+	localStorage: new TV_Storage_Default(),
 
 	// Default Platform Player instance.
 	player: new TV_Player_Default(),
