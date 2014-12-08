@@ -19,6 +19,8 @@
 	"browserify": true,
 	"predef": [
 		"Common",
+		"curWidget,
+		"FileSystem",
 		"module",
 		"require"
 	]
