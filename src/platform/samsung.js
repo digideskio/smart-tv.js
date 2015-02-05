@@ -57,7 +57,7 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 	// Name of the device's model.
 	//
 	getModel: function() {
-		return navigator.userAgent;
+		return this.getProductCode();
 	},
 
 	//
@@ -109,6 +109,23 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 			me.pluginAPI.unregistKey(me.keysAPI.KEY_VOL_DOWN);
 			me.pluginAPI.unregistKey(me.keysAPI.KEY_MUTE);
 		};
+	},
+
+
+	//
+	// TV
+	//
+
+	//
+	// This is the best way to get a proper TV model.
+	// From Samsung Guide:
+	// The GetProductCode function gets the product code (for example,
+	// UNNOC7000).
+	// @return returns the target product code or a negative value if it fails.
+	//
+	getProductCode: function() {
+		this._sef = utils.initSEF('TV');
+		return this._sef.Execute('GetProductCode');
 	},
 
 
