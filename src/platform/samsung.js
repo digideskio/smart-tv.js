@@ -57,7 +57,7 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 	// Name of the device's model.
 	//
 	getModel: function() {
-		return navigator.userAgent;
+		return this._getModel();
 	},
 
 	//
@@ -128,6 +128,16 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 		this._sef = utils.initSEF('NNavi');
 		// this._sef.Open('NNavi', '1.016', 'NNavi');
 		return this._sef.Execute('GetDUID', mac);
+	},
+
+	//
+	// This API is used to get the Model of the Device.
+	// @return returns the model code(e.g: 14_GOLFP) of the Device,
+	// or a negative number if it fails.
+	//
+	_getModel: function() {
+		this._sef = this.initSEF('NNavi');
+		return this._sef.Execute('GetModel');
 	},
 
 
