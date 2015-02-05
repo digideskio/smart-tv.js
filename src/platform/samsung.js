@@ -57,7 +57,7 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 	// Name of the device's model.
 	//
 	getModel: function() {
-		return this._getModel();
+		return this.getProductCode();
 	},
 
 	//
@@ -113,6 +113,23 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 
 
 	//
+	// TV
+	//
+
+	//
+	// This is the best way to get a proper TV model.
+	// From Samsung Guide:
+	// The GetProductCode function gets the product code (for example,
+	// UNNOC7000).
+	// @return returns the target product code or a negative value if it fails.
+	//
+	getProductCode: function() {
+		this._sef = utils.initSEF('TV');
+		return this._sef.Execute('GetProductCode');
+	},
+
+
+	//
 	// NNAVI
 	//
 
@@ -128,16 +145,6 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 		this._sef = utils.initSEF('NNavi');
 		// this._sef.Open('NNavi', '1.016', 'NNavi');
 		return this._sef.Execute('GetDUID', mac);
-	},
-
-	//
-	// This API is used to get the Model of the Device.
-	// @return returns the model code(e.g: 14_GOLFP) of the Device,
-	// or a negative number if it fails.
-	//
-	_getModel: function() {
-		this._sef = this.initSEF('NNavi');
-		return this._sef.Execute('GetModel');
 	},
 
 

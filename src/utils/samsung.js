@@ -31,6 +31,9 @@ module.exports = {
 		if (pluginName === 'Player') {
 			sef.Open('Player', '1.112', 'Player');
 		}
+		if (pluginName === 'TV') {
+			sef.Open('TV', '1.001', 'TV');
+		}
 		return sef;
 	}
 	
