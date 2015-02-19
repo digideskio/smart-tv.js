@@ -8,6 +8,7 @@
 
 var inherits = require('../inherits');
 var TV_Platform = require('../platform');
+var TV_Input = require('../input');
 var utils = require('../utils/samsung');
 var $script = require('scriptjs');
 
@@ -41,6 +42,11 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 			me.pluginAPI = new Common.API.Plugin();
 			me.widgetAPI = new Common.API.Widget();
 			me.keysAPI = new Common.API.TVKeyValue();
+
+			//
+			// Platform input instance.
+			//
+			me.input = new TV_Input(me.name);
 
 			// Send 'ready' message to the Application Manager
 			// http://www.samsungdforum.com/Guide/art00042/index.html
