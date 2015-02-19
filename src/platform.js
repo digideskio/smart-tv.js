@@ -7,11 +7,19 @@
 
 
 var TV_Platform = function(name) {
+	//
+	// Platform name.
+	//
 	this.name = name;
 };
 
 
 TV_Platform.prototype = {
+	//
+	// TV_Input instance.
+	//
+	input: null,
+
 	//
 	// Initialize platform.
 	//
