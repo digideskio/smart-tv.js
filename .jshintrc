@@ -10,17 +10,16 @@
 	"noempty": true,
 	"quotmark": "single",
 	"undef": true,
-	"maxparams": 3,
-
+	"maxparams": 6,
 	"debug": true,
 	"funcscope": true,
 	"maxerr": 200,
-
 	"browser": true,
 	"devel": true,
-
 	"browserify": true,
-	"globals": {
-		"Common": true
-	}
+	"predef": [
+		"Common",
+		"module",
+		"require"
+	]
 }
