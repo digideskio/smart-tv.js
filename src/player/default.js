@@ -24,13 +24,15 @@ inherits(TV_Player_Default, TV_Player, {
 	// Initialize player.
 	//
 	init: function() {
-		console.log(TV_Platform_Default);
+		console.log('[TV_Player] Default Player initialized.');
 	},
 
 	//
 	// Start or resume video playback.
 	//
-	play: function() {},
+	play: function() {
+		return '[TV_Player] "play" not implemented.';
+	},
 
 	//
 	// Pause video playback.

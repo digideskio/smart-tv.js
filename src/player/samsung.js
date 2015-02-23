@@ -27,8 +27,6 @@ inherits(TV_Player_Samsung, TV_Player, {
 		this._player = utils.initSEF('Player');
 
 		// media object events
-		// this.bindEvents();
-		// this._player.OnEvent = this.onEvent.bind(this);
 		this._player.OnEvent = this.onEvent.bind(this);
 
 		utils.log('[TV_Player] Samsung Player initialized.');
