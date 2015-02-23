@@ -9,7 +9,9 @@
 var inherits = require('../inherits');
 var TV_Platform = require('../platform');
 var TV_Input = require('../input');
+var TV_Player_Samsung = require('../player/samsung');
 var utils = require('../utils/samsung');
+var events = require('../events');
 var $script = require('scriptjs');
 
 
@@ -84,8 +86,8 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 	//  Plugins
 	//------------------------------------//
 
-	// Default Platform Player instance.
-	// player: new TV_Player_Samsung(),
+	// Samsung Platform Player instance.
+	player: new TV_Player_Samsung(),
 
 
 	//  Platform specific
@@ -114,6 +116,11 @@ inherits(TV_Platform_Samsung, TV_Platform, {
 			me.pluginAPI.unregistKey(me.keysAPI.KEY_VOL_UP);
 			me.pluginAPI.unregistKey(me.keysAPI.KEY_VOL_DOWN);
 			me.pluginAPI.unregistKey(me.keysAPI.KEY_MUTE);
+
+			//
+			// DEVICE READY
+			//
+			events.trigger(document, 'deviceready');
 		};
 	},
 

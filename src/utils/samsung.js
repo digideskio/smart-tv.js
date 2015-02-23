@@ -2,11 +2,24 @@
 //  UTILS
 //------------------------------------//
 
-// =>
+// => Samsung platform specific utilities file.
 
 
 
 module.exports = {
+
+
+	//
+	// Logging
+	//
+	log: function(msg) {
+		if (console && console.log) {
+			console.log(msg);
+		} else {
+			alert(msg);
+		}
+	},
+
 
 	//
 	// Initialize Samsung native object.
@@ -35,6 +48,14 @@ module.exports = {
 			sef.Open('TV', '1.001', 'TV');
 		}
 		return sef;
+	},
+
+
+	//
+	// Seconds to Milliseconds
+	//
+	s2ms: function(seconds) {
+		return seconds * 1000;
 	}
-	
+
 };

@@ -9,6 +9,8 @@
 var inherits = require('../inherits');
 var TV_Platform = require('../platform');
 var TV_Input = require('../input');
+var TV_Player_Default = require('../player/default');
+var events = require('../events');
 // var TV_Player_Default = require('../player/default');
 
 
@@ -31,6 +33,11 @@ inherits(TV_Platform_Default, TV_Platform, {
 		this.input = new TV_Input(this.name);
 
 		this.log('[TV] Default Platform initialized.');
+
+		//
+		// DEVICE READY
+		//
+		events.trigger(document, 'deviceready');
 	},
 
 	//
@@ -65,7 +72,7 @@ inherits(TV_Platform_Default, TV_Platform, {
 	//------------------------------------//
 
 	// Default Platform Player instance.
-	// player: new TV_Player_Default(),
+	player: new TV_Player_Default(),
 
 
 	//  Platform specific
