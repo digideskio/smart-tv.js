@@ -8,7 +8,6 @@
 
 var inherits = require('../inherits');
 var TV_Player = require('../player');
-var TV_Platform_Default = require('../Platform/default');
 
 
 var TV_Player_Default = function() {
