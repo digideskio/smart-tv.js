@@ -2,32 +2,36 @@
   "name": "smart-tv.js",
   "version": "0.0.2",
   "description": "Smart TV apps development framework.",
+  "author": "Rui Posse <ruiposse@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ruiposse/smart-tv.js",
+  "keywords": [
+    "smart-tv",
+    "tv",
+    "samsung"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruiposse/smart-tv.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ruiposse/smart-tv.js/issues"
+  },
   "dependencies": {
     "inherits": "^2.0.1",
     "scriptjs": "^2.5.7"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "load-grunt-tasks": "^1.0.0",
+    "grunt-browserify": "^3.2.0",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-uglify": "^0.5.0",
-    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-watch": "^0.6.0",
-    "grunt-browserify": "^3.2.0"
+    "load-grunt-tasks": "^1.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ruiposse/smart-tv.js.git"
-  },
-  "keywords": [
-    "smart-tv",
-    "tv",
-    "samsung"
-  ],
-  "author": "Rui Posse <ruiposse@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ruiposse/smart-tv.js/issues"
-  },
-  "homepage": "https://github.com/ruiposse/smart-tv.js"
+  "scripts": {
+    "build": "./node_modules/grunt-cli/bin/grunt build"
+  }
 }

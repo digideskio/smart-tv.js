@@ -6,6 +6,9 @@
 
 
 
+var events = require('./events');
+
+
 var TV_Input = function(platform) {
 	// Initialize.
 	this.init(platform);
@@ -30,15 +33,15 @@ TV_Input.prototype = {
 	init: function(platform) {
 		// Create key map.
 		this.buildKeyMap(platform);
-
-		// bind keydown ?
-		// document.addEventListener('keydown', function(ev) { console.log(ev); }, false);
 	},
 
 
 	//  Key Maps
 	//------------------------------------//
 
+	//
+	// Default Virtual Key Codes.
+	//
 	keyMap: {
 		VK_LEFT: 37,
 		VK_UP: 38,
@@ -52,7 +55,6 @@ TV_Input.prototype = {
 	// Create key map based on platform name.
 	//
 	buildKeyMap: function(platform) {
-		console.log('keyMap' + platform);
 		this.key = this['keyMap' + platform]();
 	},
 
@@ -63,10 +65,11 @@ TV_Input.prototype = {
 	keyMapDefault: function() {
 		// http://www.w3.org/TR/2001/WD-DOM-Level-3-Events-20010410/DOM3-Events.html#events-Events-KeyEvent
 		if (window.KeyEvent && window.KeyEvent.DOM_VK_LEFT) {
-			this.key = this.createKeys('DOM_VK_', window.KeyEvent);
+			var k = this.createKeys('DOM_VK_', window.KeyEvent);
 			// Normalize VK_ENTER and VK_BACK
-			this.key.VK_ENTER = this.key.VK_RETURN;
-			this.key.VK_BACK = this.key.VK_BACK_SPACE;
+			k.VK_ENTER = k.VK_RETURN;
+			k.VK_BACK = k.VK_BACK_SPACE;
+			return k;
 		} else {
 			// Absolute default keys.
 			// http://www.javascripter.net/faq/keycodes2011.htm
@@ -78,13 +81,14 @@ TV_Input.prototype = {
 	// 'Samsung' Platform key maps.
 	//
 	keyMapSamsung: function() {
-		this.key = this.createKeys('KEY_', new Common.API.TVKeyValue());
+		var k = this.createKeys('KEY_', new Common.API.TVKeyValue());
 		// Normalize VK_BACK
-		this.key.VK_BACK = this.key.VK_RETURN;
+		k.VK_BACK = k.VK_RETURN;
+		return k;
 	},
 
 	//
-	// Map virtual keys.
+	// Map virtual keys. (Polyfill for keyboard events keyCode)
 	//
 	createKeys: function(prefix, platformKeys) {
 		var alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N',
