@@ -20,6 +20,7 @@
 	"predef": [
 		"Common",
 		"module",
-		"require"
+		"require",
+		"TV"
 	]
 }
