@@ -104,18 +104,18 @@ inherits(TV_Player_Samsung, TV_Player, {
 	// http://www.samsungdforum.com/SamsungDForum/ForumView/f0cd8ea6961d50c3?forumID=ec9f3562a5ebd82a
 	onEvent: function(param1, param2) {
 		switch(param1) {
-			case 1: this.onConnectionFailed(); break;
-			case 2: this.onAuthenticationFailed(); break;
-			case 3: this.onStreamNotFound(); break;
-			case 4: this.onNetworkDisconnected(); break;
-			case 6: this.onRenderError(param2); break;
-			case 8: this.onRenderingComplete(); break;
-			case 9: this.onStreamInfoReady(); break;
-			case 11: this.onBufferingStart(); break;
-			case 12: this.onBufferingComplete(); break;
-			case 13: this.onBufferingProgress(param2); break;
-			case 14: this.setCurrentTime(param2); break;
-			case 20: this.onCustomEvent(param2); break;
+			case 1: TV.player.onConnectionFailed(); break;
+			case 2: TV.player.onAuthenticationFailed(); break;
+			case 3: TV.player.onStreamNotFound(); break;
+			case 4: TV.player.onNetworkDisconnected(); break;
+			case 6: TV.player.onRenderError(param2); break;
+			case 8: TV.player.onRenderingComplete(); break;
+			case 9: TV.player.onStreamInfoReady(); break;
+			case 11: TV.player.onBufferingStart(); break;
+			case 12: TV.player.onBufferingComplete(); break;
+			case 13: TV.player.onBufferingProgress(param2); break;
+			case 14: TV.player.setCurrentTime(param2); break;
+			case 20: TV.player.onCustomEvent.call(this, param2); break;
 		}
 	},
 
@@ -133,10 +133,11 @@ inherits(TV_Player_Samsung, TV_Player, {
 	// OnAuthenticationFailed event is sent by media player when it fails to
 	// play because authentication process has been failed.
 	//
-	onAuthenticationFailed: function() {
-		// utils.log('[TV_PLAYER] onAuthenticationFailed, state = ' + this.states.ERROR);
-		// this.setState(this.states.ERROR);
-	},
+	// onAuthenticationFailed: function() {
+	// 	utils.log('[TV_PLAYER] onAuthenticationFailed, state = ' +
+	// 		this.states.ERROR);
+	// 	this.setState(this.states.ERROR);
+	// },
 
 	//
 	// OnBufferingStart event is sent by media player when it gets out of
@@ -260,7 +261,7 @@ inherits(TV_Player_Samsung, TV_Player, {
 	// parameter of Play() API is not exist.
 	//
 	onStreamNotFound: function() {
-		// tv.log('[TV_PLAYER] onStreamNotFound, state = ' +
+		// utils.log('[TV_PLAYER] onStreamNotFound, state = ' +
 		//     this.states.ERROR);
 		// this.setState(this.states.ERROR);
 		utils.log('[TV_PLAYER] onStreamNotFound.');
@@ -293,7 +294,8 @@ inherits(TV_Player_Samsung, TV_Player, {
 		// Execute("SetInitialBufferSize" 400*1024); //400KB
 		this._url = url || this._url;
 
-		if (this._url.match(/\.m3u8$/i) && !this._url.match(/\|COMPONENT\=HLS/)) {
+		if (this._url.match(/\.m3u8$/i) &&
+			!this._url.match(/\|COMPONENT\=HLS/)) {
 			// HLS requirement for Samsung
 			this._url = this._url + '|COMPONENT=HLS';
 		}
@@ -311,6 +313,45 @@ inherits(TV_Player_Samsung, TV_Player, {
 	//
 	_getDuration: function() {
 		return this._player.Execute('GetDuration'); // totalTime
+	},
+
+
+	//  DRM
+	//------------------------------------//
+
+	setLicenseServer: function(serverUrl) {
+		var set_player_property = this._player.Execute('SetPlayerProperty', 4,
+			serverUrl, serverUrl.length);
+		return set_player_property;
+	},
+
+	setCustomData: function(customData) {
+		var set_player_property = this._player.Execute('SetPlayerProperty', 3,
+			customData, customData.length);
+		return set_player_property;
+	},
+
+	playDRM: function(settings) {
+		var init, licenseServer, customData, playback;
+
+		utils.log('[TV_Player] PlayDRM.');
+
+		init = this.initPlayer(settings.content);
+		utils.log('[TV_Player] initPlayer = ' + init);
+		utils.log('content = ' + settings.content);
+
+		licenseServer = this.setLicenseServer(settings.server);
+		utils.log('[TV_Player] setLicenseServer = ' + licenseServer +
+			' | licenseServer = ' + settings.server);
+
+		if (settings.customData) {
+			customData = this.setCustomData(settings.customData);
+			utils.log('[TV_Player] customData = ' + customData);
+			utils.log('customData = ' + settings.customData);
+		}
+
+		playback = this._player.Execute('StartPlayback');
+		utils.log('[TV_Player] startPlayback = ' + playback);
 	}
 
 });
