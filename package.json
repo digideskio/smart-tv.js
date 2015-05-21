@@ -1,6 +1,6 @@
 {
   "name": "smart-tv.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Smart TV apps development framework.",
   "author": "Rui Posse <ruiposse@gmail.com>",
   "license": "MIT",
