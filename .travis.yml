@@ -10,5 +10,4 @@ deploy:
     secure: d7CiOGyRCF5+t/gtgoljRUF+adZCHtQlJ1fAjetVYkZcWkKaplYIj3diBdtGE/fvNB84Q5IzdWOd+wzYUYcsG48RY+CZF1CDorg5qqZCQGENkUUoBeWbCtf8h8qEx/4VhjetbhGQTRV7F+DNl8VxhjHoE+fPo45i0L5qC08dFqs=
   on:
     tags: true
-    repo: ruiposse/smart-tv.js
     branch: master
